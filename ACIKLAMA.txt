@@ -1,0 +1,11 @@
+############          TODO            ################
+
+*
+projeyi hazırladık, hazırlarken vuex, router, css preprocessorr seçtik, hazırlandıktan sonra klasöre gidip vuetify seçtik, vuetify documentasyonundan wireframes den base in kodunu github dan alıp App.vue ya koyduk, 
+
+* vuetify doc da UI components dan navigation drawers daki compun vue nvigation drawer kısmını alıp kendi projemizdeki ilgili kısma yapıştırdık
+
+*
+app düzenlemesini kod yardımı ile yaptık, items hatası verecek v-for için bunuda scripts deki dummy array i alarak script e ekleyerek çözeceğiz
+
+*
