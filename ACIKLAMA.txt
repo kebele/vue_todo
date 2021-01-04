@@ -9,3 +9,75 @@ projeyi hazırladık, hazırlarken vuex, router, css preprocessorr seçtik, haz�
 app düzenlemesini kod yardımı ile yaptık, items hatası verecek v-for için bunuda scripts deki dummy array i alarak script e ekleyerek çözeceğiz
 
 *
+router ayarları
+home ve about var default, bunları ayarlayalım, vuetify - UI comp - application oradan <router-view></router-view> alıp App.vue daki main içine koyalım, artık home comp u App.vue da sayfada görebiliyoruz, 
+
+*
+vuetify - UI comp - lists de APi a bakıyoruz burada to parametresinin kullanımına bakıp item list imizi buna göre göncelliyoruz, to ekliyoruz burada about a to:'/about' dedik ve template de de :to="item.to" şeklinde gösteriyoruz
+
+*
+iconları değiştirelim, yine vuetify dan icons a , metarial design icons dan todo iconu bulalım, format-list-checks, bunu items array de ilgili düzenlemeyi yapıyoruz, (App.vue ya bak)
+
+*
+about sayfasını biraz düzenleyelim, vuetify styles and animations - spacing a gidip gerekli ayarlamamıza ilişkjin kodu alalım, 
+
+*
+home yerine Todo kullanalım sayfa adı, bunun için router > index.js e gidelim Home olanları Todo ile değiştirip, Home.vue yu da Todo.vue olatrak değişitirelim
+
+*
+Todo.vue yu düzenleyelim, App.vue da düzenleme yaptık, comp dan helloworld.vue kaldırdık, vuetify dan UI comp dan Bars dan app bar a gidip buradan güzel bir app bar seçtik, v-app-bar kısmını seçtik, ilgili kısma yapıştırdık ancakl bizim burada scriptten kullandığımız bazı parametreleri almamız ve bize app bar ile gelen bazı özellliklerden lkurtalmamız gerek, mesela app eklemeliyiz ve shrink... ve scrollk... dan kurtulmalıyız, prominent ekledik, resmide istediğimi gibi değiştrebiliriz, 
+<v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon> düzenlemesini de yaptık, 
+
+*
+todo list e başlayalım, vuetify dan UI list e bakıp bir liste style ı begenelim, kodu v-listten itibaren alıp Todo.vue da h1 yerine koyalım, keyfimize göre düzenleyeklim, bir tane list item dan gerisini silelim, zaten todo da oluşturacağız, 
+
+*
+data da tasks [{..},{..},] oluşturup bunları v-listte v-for ile dönelim, 
+
+*
+divider ekleyelim her item sonrası içiçn bunun için kodda biraz oynayalım
+
+* 
+task lara bir property ekleyelim, done: false, tıkladığımızda true olsun işaret değişsin filan, v-listi-irtem a tıklayınca check toggle olsun bunu ayarlayalım, template de, tıkladığımız task ın id sini alalım, 
+
+    doneTask(id){
+      // console.log('id : ', id)
+      let task = this.tasks.filter(task => task.id === id)[0]
+      task.done = !task.done
+    }
+
+*
+tıklayınca background değişsin, vuetify da stylez anim.. color a bakalım, renk kodunu seçip class olarak vereceğiz ve text in de üstü çizilsin bu da text and typo.. de, bunuda aynı şekilde class olarak task.done a bağlıyoruz
+
+*
+delete i de yapalım, list e gidip delete de kullanacağımız kısma it bir comp bulup oradan apartıp iconu değiştireceğiz, 
+
+        <v-list-item-action>
+          <v-btn icon>
+            <v-icon color="grey lighten-1">mdi-information</v-icon>
+          </v-btn>
+        </v-list-item-action>
+
+<v-btn @click.stop="deleteTask(task.id)" icon> şeklinde düzenledik ve methods a deleteTask ı ekledik
+
+    deleteTask(id){
+      this.tasks = this.tasks.filter(task => task.id !== id)
+    }
+
+
+*
+yeni bir todo eklemek, yine vuetify a gidip forms and controla a gidip, text field lar içinden birini seçelim, gerekli property leri api sinden alaım, clearable vb. sonra v-model ile buraya yazılan verilerin tasks a item olarak eklenmesini yapalım, v-model ile yapacağız, data da newTaskTitle : "" hazırlayalım yani buraya yazılan şey data daki newTaskTitle a eşitlenecek, daha sonra ekleme butonu ilede todo item olarak tasks içine yerleşecek, yapacağımız şey textfield içindeki bir icona tıklanma eventi ekleyeceğimiz için yine text fi,led ile iligli api ye gidip eventlere bakacağız ve 
+
+     <v-text-field
+          v-model="newTaskTitle"
+          @click:append="addTask"
+          @keyup.enter="addTask"
+          class="pa-3"
+            outlined
+            label="add task"
+            append-icon="mdi-pencil-plus"
+            hide-details
+            clearable
+          ></v-text-field>
+
+burada addTask todo nesnesi push layacak, 
